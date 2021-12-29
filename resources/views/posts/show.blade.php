@@ -4,7 +4,6 @@
             <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
                 <img src="/images/illustration-1.png" alt="" class="rounded-xl">
 
-
                 <p class="mt-4 block text-gray-400 text-xs">
                     Published
                     <time>{{ $post->created_at->diffForHumans() }}</time>
@@ -50,6 +49,11 @@
                     {!! $post->body !!}
                 </div>
             </div>
+            <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                @foreach ($post->comments as $comment)
+                    <x-post-comment :comment="$comment"/>
+                @endforeach
+            </section>
         </article>
     </main>
 </x-layout>

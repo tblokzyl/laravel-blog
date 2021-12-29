@@ -19,15 +19,18 @@ class SessionsController extends Controller
         ]);
 
         // attempt to authenticate and login the user
-        if (auth()->attempt($attributes)) {
-            // redirect with a success flash message
-            return redirect('/')->with('success', 'Welcome Back!');
+        if (! auth()->attempt($attributes)) {
+            // auth failed.
+            return back()
+                ->withInput()
+                ->withErrors(['email' => 'Your provided credentials could not be verified.']);
         }
 
-        // auth failed.
-        return back()
-            ->withInput()
-            ->withErrors(['email' => 'Your provided credentials could not be verified.']);
+        session()->regenerate();
+
+        // redirect with a success flash message
+        return redirect('/')->with('success', 'Welcome Back!');
+
     }
 
     public function destroy()
