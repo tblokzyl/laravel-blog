@@ -14,7 +14,7 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 Route::post('/posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
 
-route::get('admin/post/create', [PostController::class, 'create'])->middleware('admin');
+route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin');
 route::post('admin/posts', [PostController::class, 'store'])->middleware('admin');
 
 Route::post('newsletter', NewsletterController::class);
